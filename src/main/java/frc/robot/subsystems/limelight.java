@@ -5,15 +5,25 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class limelight extends SubsystemBase {
     
     private NetworkTable table;
     private boolean isConnected = false;
-    private double hearBeatPeriod = 0.1;
 
-    public limelight() {}
+    public limelight() {
+        table = NetworkTableInstance.getDefault().getTable("limelight");
+    }
+    
+    public limelight(String name) {
+        table = NetworkTableInstance.getDefault().getTable(name);
+    }
+
+    public limelight(NetworkTable table) {
+        this.table = table;
+    }
     
     @Override
     public void periodic() {
